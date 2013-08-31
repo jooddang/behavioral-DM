@@ -1,0 +1,28 @@
+Features: Words in each review.
+Prediction: Score for each review.
+
+Algorithm: Each word is a feature. To reduce model size, we only use the top 50k most common words, or maybe just words that appear more than 50 times in the data set (~60k).
+
+To begin, split the tokens directory into ten sets. Each set will be one of our folds.
+
+Train the regression model on the remaining folds. We first need to extract the scores for each document. This should be done by looking for the value between the <rating> tags. As before, create a word list containing just the 50k most common words for each review. Create a dictionary of review index to rating.
+
+Vocab => dict.txt. Map of word word->word index
+
+dict.txt index->featureID
+reviewID->rating
+reviewID->featureID
+
+Once we have a review matrix containing all the reviews and relevant feature ID's, we can start the learning process.
+
+Reading in the doc matrix
+- In review_text: treat every (line, pos, token) as an entry in the doc_matrix for document curr_idx.
+- In review_text is false when we see end bracket; increment curr_idx
+- In rating is true: treat current token value as rating
+- In rating is false when we see end
+
+
+INSTALLATION/HOW TO RUN
+1) Make sure dict.txt and tokens.bin are in the working directory.
+2) Run ./bidmat
+3) :load p2.scala

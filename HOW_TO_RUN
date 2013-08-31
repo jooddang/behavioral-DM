@@ -1,0 +1,26 @@
+Our code is a bit disorganized, sorry...
+
+Our code expects certain data files to be in certain places. Run the run.bash
+file to set up the environment.
+
+run.bash will download our pre-computed data blocks (in the /data folder). You
+can compute these yourself by running :load p2_prep.scala from inside BIDMat,
+but it will take a while depending on how fast your machine is.
+
+Once you've got the data blocks, you can run :load p2.scala from inside BIDMat
+to train the classifier. During training, we save the beta matrix to disk in
+/data. We also store error-vs-iteration data in that folder. You'll need to run
+p2.scala for each block, changing the argument to the function
+generate_training_set() on line 356 to run the classifier on each block of
+reviews. We ran all ten in parallel with slightly different copies of the file
+inside a screen session. Sorry about that.
+
+Once you've run the classifiers on every block and you're happy with how
+they've converged, kill it, and then run p2_roc.scala. That will produce a
+series of ROC plots by comparing the last beta value the classifier produced
+for each block. There are two python scripts that can be used to generate the
+graph data -- errorVSiter.py and roc.py. We actually produced the graphs in
+Excel; we can give you the spreadsheet files if you're interested.
+posneg.scala generates the list of most positive/negative words.
+
+Any questions, let us know: shaddi@cs.berkeley.edu.
